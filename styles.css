@@ -3,15 +3,25 @@
     padding:0;
 }
 
-body {
-    width: 100%;
+html,body {
     height: 100%;
+}
+
+body {
+    align-content: center;
+    background-color: #000;
+}
+
+#card {
+    aspect-ratio: 1/1.7;
+    position: relative;
+    overflow: hidden;
     background-image: url("background.png");
     background-size: cover;
     background-position: center;
 }
 
-body * {
+#card > * {
     position: absolute;
     inset: 0;
     
@@ -20,4 +30,39 @@ body * {
 #background {
     background-color: hsl(0, 30%, 30%);
     mix-blend-mode: multiply;
+}
+
+#frame {
+    border-image:url("Outline.svg");
+    border-image-slice: calc(49 / 100 * 100%);
+    border-image-width: auto;
+    mix-blend-mode:lighten;
+    opacity: 0.3;
+}
+
+#logo {
+    width: 100%;
+    mix-blend-mode:lighten;
+    opacity: 0.3;
+}
+
+#content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+}
+
+#message {
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    text-align: center;
+    /* align-content: center; */
+    color: bisque;
+    flex-grow: 1;
+    padding: 8%;
+    padding-bottom: 20%;
+    padding-top: 0;
+    text-shadow: 5px 5px 10px #000;
 }

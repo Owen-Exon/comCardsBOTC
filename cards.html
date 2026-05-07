@@ -2,10 +2,18 @@
 <html lang="en">
     <head>
         <link rel="stylesheet" href="styles.css">
-        <title>Grid</title>
+        <title>card</title>
     </head>
     <body>
-        <div id="background"></div>
-        <div></div>
+        <div id="card">
+            <div id="background"></div>
+            <div id="frame"></div>
+            <div id="content">
+                <img src="./icons/amnesiac.png" id="logo" alt="currentLogo">
+                <h1 id="message">These characters are not in play</h1>
+            </div>
+        </div>
+        <script src="./scripts/fittext.js"></script>
+        <script>fitText(document.getElementById('message'),0.74)</script>
     </body>
 </html>
