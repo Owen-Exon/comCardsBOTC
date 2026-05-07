@@ -4,7 +4,7 @@ import PIL.ImageOps
 import glob
 import os
 
-files = glob.glob("./Icons/*.png")
+files = glob.glob("./colourIcons/*.png")
 
 # for file in files:
 #     fileName = os.path.basename(file)
@@ -14,8 +14,9 @@ files = glob.glob("./Icons/*.png")
 #     img.save(f'./grayIcons/{name}')
 
 for file in files:
-    fileName = os.path.basename(file)
-    name = fileName.replace("Icon_","")
+    name = os.path.basename(file)
+    name = name.replace("Icon_","")
+    name = name.replace("Generic_","")
 
     image = Image.open(file)
     
@@ -30,4 +31,4 @@ for file in files:
 
     final_transparent_image = final_transparent_image.convert("LA")
     
-    final_transparent_image.save(f'./grayIcons/{name}')
+    final_transparent_image.save(f'./icons/{name}')
