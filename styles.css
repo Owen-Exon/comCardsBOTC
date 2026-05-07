@@ -8,6 +8,11 @@
     src: url("./fonts/Cinzel-VariableFont_wght.ttf");
 }
 
+@font-face {
+    font-family: "Dumbledor";
+    src: url("./fonts/dum1.ttf");
+}
+
 html,body {
     height: 100%;
     font-family: "Cinzel";
@@ -34,7 +39,7 @@ body {
 }
 
 #background {
-    background-color: hsl(0, 30%, 30%);
+    background-color: hsl(0, 25%, 20%);
     mix-blend-mode: multiply;
 }
 
@@ -53,24 +58,25 @@ body {
     opacity: 0.3;
 }
 
-#content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-around;
-}
-
 #message {
+    top: 52.5%;
+    font-size: 11vw;
     width: 100%;
-    height: 100%;
+    height: auto;
     box-sizing: border-box;
     text-align: center;
     align-content: center;
-    color: bisque;
-    flex-grow: 1;
+    color: rgb(255, 255, 255);
     padding: 8%;
-    padding-bottom: 20%;
     padding-top: 0;
-    text-shadow: 5px 5px 10px #000;
+    text-shadow: 5px 5px 10px #000, 5px 5px 10px #000;
     font-weight: 600;
+}
+
+em {
+    color: bisque;
+    font-family: Dumbledor;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 15vw;
 }
