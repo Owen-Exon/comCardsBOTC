@@ -25,6 +25,9 @@ body {
 }
 
 #selection {
+    background-color: #000;
+    height: 100%;
+    gap: 0.4vw;
     min-width: 100%;
     width: max-content;
     position: absolute;
@@ -35,8 +38,15 @@ body {
 
 #selection button {
     font-size: 4.3vw;
-    height: 6.5vw;
+    padding: 1vw;
     text-align: left;
+}
+
+h2 {
+    padding: 1vw;
+    background-color: #000;
+    color: #fff;
+    text-align: center;
 }
 
 #card {

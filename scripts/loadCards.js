@@ -46,11 +46,7 @@ function loadCard(i) {
 
     message.innerHTML = cardText
 
-    if (presetColours.hasOwnProperty(card.colour)) {
-        background.style.backgroundColor = presetColours[card.colour]
-    } else {
-        background.style = card.colour
-    }
+    background.style.backgroundColor = presetColours.hasOwnProperty(card.colour) ? presetColours[card.colour] : card.colour
 
     logo.src = `./icons/${card.logo}.png`
     if (this.card.hasOwnProperty("rotation")) {
