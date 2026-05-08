@@ -57,7 +57,7 @@ h2 {
     aspect-ratio: 1/1.7;
     position: relative;
     overflow: hidden;
-    background-image: url("background.png");
+    background-image: url("./background.png");
     background-size: cover;
     background-position: center;
 }
@@ -73,7 +73,7 @@ h2 {
 }
 
 #frame {
-    border-image:url("Outline.svg");
+    border-image:url("./Outline.svg");
     border-image-width: 30vw;
     border-image-slice: 47%;
     border-image-repeat: stretch;
