@@ -21,6 +21,22 @@ html,body {
 body {
     align-content: center;
     background-color: #000;
+    overflow-x: hidden;
+}
+
+#selection {
+    min-width: 100%;
+    width: max-content;
+    position: absolute;
+    top: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+#selection button {
+    font-size: 4.3vw;
+    height: 6.5vw;
+    text-align: left;
 }
 
 #card {
@@ -82,4 +98,8 @@ body {
 
 .mini {
     font-size: 6vw;
+}
+
+.hidden {
+    display: none !important;
 }

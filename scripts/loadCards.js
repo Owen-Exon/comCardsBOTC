@@ -8,10 +8,22 @@ const presetColours = {
     "neutral":"hsl(108, 39%, 26%)",
 }
 
+const cardContainer = document.getElementById("card")
 
 const message = document.getElementById("message")
 const logo = document.getElementById("logo")
 const background = document.getElementById("background")
+
+const selection = document.getElementById("selection")
+
+for (let i = 0; i < cards.length; i++) {
+    const selectButton = document.createElement("button")
+    selectButton.innerHTML = cards[i].text
+    selectButton.onclick = () => {loadCard(i); selection.classList.add("hidden")}
+    selection.appendChild(selectButton)
+}
+
+cardContainer.onclick = () => {selection.classList.remove("hidden")}
 
 function loadCard(i) {
     card = cards[i]
