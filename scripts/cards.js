@@ -16,6 +16,22 @@ const cards = [
         colour:"evil"
     },
     {
+        text:"we should CHAT tomorrow",
+        logo:"yaggababble",
+        mirror:"x",
+        colour:"meta"
+    },
+    {
+        text:"i made a MISTAKE this is my correction",
+        logo:"steward",
+        colour:"meta"
+    },
+    {
+        text:"invalid selection CHOOSE AGAIN",
+        logo:"gossip",
+        colour:"meta"
+    },
+    {
         text:"did you VOTE / today",
         logo:"flowergirl",
         colour:"tellme"
@@ -35,32 +51,6 @@ const cards = [
         text:"THIS PLAYER is",
         logo:"ojo",
         colour:"tellyou"
-    },
-    {
-        text:"we should CHAT tomorrow",
-        logo:"yaggababble",
-        mirror:"x",
-        colour:"meta"
-    },
-    {
-        text:"i made a MISTAKE this is my correction",
-        logo:"steward",
-        colour:"meta"
-    },
-    {
-        text:"invalid selection CHOOSE AGAIN",
-        logo:"gossip",
-        colour:"meta"
-    },
-    {
-        text:"these characters are NOT / IN PLAY",
-        logo:"outsider",
-        colour:"good"
-    },
-    {
-        text:"this character SELECTED you",
-        logo:"revolutionary",
-        colour:"ability"
     },
     {
         text:"CHOOSE / for your ability",
@@ -83,9 +73,18 @@ const cards = [
         colour:"evil"
     },
     {
+        text:"these characters are NOT / IN PLAY",
+        logo:"outsider",
+        colour:"neutral"
+    },
+    {
         text:"this character IS / IN PLAY",
         logo:"toymaker",
-        colour:"ability"
-    }
-    
+        colour:"neutral"
+    },
+    {
+        text:"this character SELECTED you",
+        logo:"revolutionary",
+        colour:"neutral"
+    },
 ]

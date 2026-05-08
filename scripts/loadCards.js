@@ -1,11 +1,13 @@
 const presetColours = {
-    "evil":"hsl(0, 35%, 16%)",
-    "good":"hsl(241, 51%, 25%)",
-    "meta":"hsl(207, 51%, 25%)",
-    "tellme":"hsl(28, 44%, 24%)",
+    "evil":"hsl(0, 35%, 18%)",
+    "good":"hsl(198, 51%, 25%)",
+    "meta":"hsl(320, 51%, 25%)",
+    "tellme":"hsl(51, 50%, 25%)",
     "tellyou":"hsl(272, 39%, 26%)",
-    "ability":"hsl(127, 25%, 20%)"
+    "ability":"hsl(39, 41%, 21%)",
+    "neutral":"hsl(108, 39%, 26%)",
 }
+
 
 const message = document.getElementById("message")
 const logo = document.getElementById("logo")
@@ -17,7 +19,7 @@ function loadCard(i) {
 
     cardText = cardText.replace(
         /\//g,
-       "<br>"
+       " <br> "
     )
 
     cardText = cardText.replace(
@@ -29,8 +31,6 @@ function loadCard(i) {
         /\([^)]*\)/g,
         match => `<span class="mini"> ${match} </span>`
     )
-
-    
 
     message.innerHTML = cardText
 
