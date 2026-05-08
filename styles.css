@@ -23,7 +23,7 @@ body {
     background-color: #000;
 }
 
-.card {
+#card {
     aspect-ratio: 1/1.7;
     position: relative;
     overflow: hidden;
@@ -32,17 +32,17 @@ body {
     background-position: center;
 }
 
-.card > * {
+#card > * {
     position: absolute;
     inset: 0;
     
 }
 
-.background {
+#background {
     mix-blend-mode: multiply;
 }
 
-.frame {
+#frame {
     border-image:url("Outline.svg");
     border-image-width: 30vw;
     border-image-slice: 47%;
@@ -51,13 +51,13 @@ body {
     opacity: 0.3;
 }
 
-.logo {
+#logo {
     width: 100%;
     mix-blend-mode:lighten;
     opacity: 0.3;
 }
 
-.message {
+#message {
     top: 50%;
     font-size: 11vw;
     width: 100%;
@@ -74,7 +74,7 @@ body {
 }
 
 .keyWord {
-    color: bisque;
+   color: bisque;
     font-family: Dumbledor;
     font-weight: 400;
     font-size: 15vw;
