@@ -43,6 +43,10 @@ body {
 }
 
 h2 {
+    font-size: 6vw;
+    font-family: Dumbledor;
+    font-weight: 400;
+    font-size: 8vw;
     padding: 1vw;
     background-color: #000;
     color: #fff;

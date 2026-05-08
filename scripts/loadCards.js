@@ -53,7 +53,7 @@ function loadCard(i) {
         logo.style.rotate = `${card.rotation}turn`
     }
     if (this.card.hasOwnProperty("mirror")) {
-        logo.style.scale = `${"-1" ? card.mirror.indexOf("x") != -1 : "1"} ${"-1" ? card.mirror.indexOf("y") != -1 : "1"}`
+        logo.style.scale = `${card.mirror.indexOf("x") != -1 ? "-1" : "1"} ${card.mirror.indexOf("y") != -1 ? "-1" : "1"}`
         card.mirror
     }
 }
