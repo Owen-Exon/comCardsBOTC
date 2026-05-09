@@ -25,9 +25,9 @@ body {
 }
 
 #selection {
-    background-color: #000;
+    backdrop-filter: blur(10px);
     height: 100%;
-    gap: 0.4vw;
+    gap: 0.5vw;
     min-width: 100%;
     width: max-content;
     position: absolute;
@@ -40,6 +40,13 @@ body {
     font-size: 4.3vw;
     padding: 1vw;
     text-align: left;
+    background-color: #000000;
+    color: #fff;
+    font-weight: 700;
+}
+
+.buttonKeyWord {
+    color: bisque;
 }
 
 h2 {
@@ -50,7 +57,7 @@ h2 {
     padding: 1vw;
     background-color: #000;
     color: #fff;
-    text-align: center;
+    text-align: left;
 }
 
 #card {
@@ -104,7 +111,7 @@ h2 {
 }
 
 .keyWord {
-   color: bisque;
+    color: bisque;
     font-family: Dumbledor;
     font-weight: 400;
     font-size: 15vw;

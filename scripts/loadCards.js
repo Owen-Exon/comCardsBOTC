@@ -16,18 +16,17 @@ const background = document.getElementById("background")
 
 const selection = document.getElementById("selection")
 
+selection.onclick = () => selection.classList.add("hidden")
+
+let cardTexts = []
+let backgroundColors = []
+let rotationStyles = []
+let scaleStyles = []
+
 for (let i = 0; i < cards.length; i++) {
-    const selectButton = document.createElement("button")
-    selectButton.innerHTML = cards[i].text
-    selectButton.onclick = () => {loadCard(i); selection.classList.add("hidden")}
-    selection.appendChild(selectButton)
-}
+    const card = cards[i]
 
-cardContainer.onclick = () => {selection.classList.remove("hidden")}
-
-function loadCard(i) {
-    card = cards[i]
-    cardText = card.text
+    let cardText = card.text
 
     cardText = cardText.replace(
         /\//g,
@@ -43,19 +42,62 @@ function loadCard(i) {
         /\([^)]*\)/g,
         match => `<span class="mini"> ${match} </span>`
     )
+    
+    cardTexts.push(cardText)
 
-    message.innerHTML = cardText
+    const cardColour = presetColours.hasOwnProperty(card.colour) ? presetColours[card.colour] : card.colour
+    backgroundColors.push(cardColour)
 
-    background.style.backgroundColor = presetColours.hasOwnProperty(card.colour) ? presetColours[card.colour] : card.colour
+    rotationStyles.push(
+        card.hasOwnProperty("rotation")
+            ? `${card.rotation}turn`
+            : ""
+    )
+
+    scaleStyles.push(
+        card.hasOwnProperty("mirror")
+            ? `${card.mirror.includes("x") ? "-1" : "1"} ${card.mirror.includes("y") ? "-1" : "1"}`
+            : ""
+    )
+
+    let buttonText = card.text
+
+    buttonText = buttonText.replace(
+        /\//g,
+       ""
+    )
+
+    buttonText = buttonText.replace(
+        /\b[A-Z]{2,}\b[?]*/g,
+        match => `<span class="buttonKeyWord"> ${match} </span>`
+    )
+    
+    buttonText = buttonText.replace(
+        /\([^)]*\)/g,
+        ""
+    )
+
+    const selectButton = document.createElement("button")
+    selectButton.innerHTML = `<span style="color:${cardColour};">█</span> ${buttonText}`
+
+    selectButton.onclick = () => {loadCard(i); selection.classList.add("hidden")}
+    selection.appendChild(selectButton)
+}
+
+cardContainer.onclick = () => {selection.classList.remove("hidden")}
+
+function loadCard(i) {
+    const card = cards[i]
+
+    message.innerHTML = cardTexts[i]
+
+    background.style.backgroundColor = backgroundColors[i]
 
     logo.src = `./icons/${card.logo}.png`
-    if (this.card.hasOwnProperty("rotation")) {
-        logo.style.rotate = `${card.rotation}turn`
-    }
-    if (this.card.hasOwnProperty("mirror")) {
-        logo.style.scale = `${card.mirror.indexOf("x") != -1 ? "-1" : "1"} ${card.mirror.indexOf("y") != -1 ? "-1" : "1"}`
-        card.mirror
-    }
+    
+    logo.style.rotate = rotationStyles[i]
+
+    logo.style.scale = scaleStyles[i]
 }
 
 loadCard(0)
