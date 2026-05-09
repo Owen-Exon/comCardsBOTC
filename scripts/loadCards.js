@@ -22,6 +22,7 @@ let cardTexts = []
 let backgroundColors = []
 let rotationStyles = []
 let scaleStyles = []
+let srcs = []
 
 for (let i = 0; i < cards.length; i++) {
     const card = cards[i]
@@ -47,6 +48,18 @@ for (let i = 0; i < cards.length; i++) {
 
     const cardColour = presetColours.hasOwnProperty(card.colour) ? presetColours[card.colour] : card.colour
     backgroundColors.push(cardColour)
+
+    src = `./icons/${card.logo}.png`
+
+    const link = document.createElement('link');
+    link.rel = 'preload';
+    link.as = 'image';
+    link.href = src;
+    link.fetchPriority = 'high';
+    
+    srcs.push(src)
+
+    document.head.append(link);
 
     rotationStyles.push(
         card.hasOwnProperty("rotation")
@@ -87,16 +100,12 @@ for (let i = 0; i < cards.length; i++) {
 cardContainer.onclick = () => {selection.classList.remove("hidden")}
 
 function loadCard(i) {
-    const card = cards[i]
-
     message.innerHTML = cardTexts[i]
 
     background.style.backgroundColor = backgroundColors[i]
 
-    logo.src = `./icons/${card.logo}.png`
-    
+    logo.src = srcs[i]
     logo.style.rotate = rotationStyles[i]
-
     logo.style.scale = scaleStyles[i]
 }
 
