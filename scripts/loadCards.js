@@ -93,20 +93,30 @@ for (let i = 0; i < cards.length; i++) {
     const selectButton = document.createElement("button")
     selectButton.innerHTML = `<span style="color:${cardColour};">█</span> ${buttonText}`
 
-    selectButton.onclick = () => {loadCard(i); selection.classList.add("hidden")}
+    selectButton.onclick = () => {loadCardIndex(i); selection.classList.add("hidden")}
     selection.appendChild(selectButton)
 }
 
 cardContainer.onclick = () => {selection.classList.remove("hidden")}
 
-function loadCard(i) {
-    message.innerHTML = cardTexts[i]
+function loadCard(text,backgroundColor,src,rotation,scale) {
+    message.innerHTML = text
 
-    background.style.backgroundColor = backgroundColors[i]
+    background.style.backgroundColor = backgroundColor
 
-    logo.src = srcs[i]
-    logo.style.rotate = rotationStyles[i]
-    logo.style.scale = scaleStyles[i]
+    logo.src = src
+    logo.style.rotate = rotation
+    logo.style.scale = scale
 }
 
-loadCard(0)
+function loadCardIndex(i) {
+    loadCard(
+        cardTexts[i],
+        backgroundColors[i],
+        srcs[i],
+        rotationStyles[i],
+        scaleStyles[i]
+    )
+}
+
+loadCardIndex(0)
