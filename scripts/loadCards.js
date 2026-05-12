@@ -150,4 +150,4 @@ function changeInputText(element) {
     }
 }
 
-loadCardIndex(17)
+loadCardIndex(0)
