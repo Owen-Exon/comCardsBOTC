@@ -10,7 +10,7 @@ const cards = [
         colour:"evil"
     },
     {
-        text:"meet your fellow MINIONS / (keep your eyes open)",
+        text:"meet your fellow MINIONS / |(keep your eyes open)|",
         logo:"legion",
         rotation:-0.08,
         colour:"evil"
@@ -87,4 +87,9 @@ const cards = [
         logo:"revolutionary",
         colour:"neutral"
     },
+    {
+        text:"| your phrase is: | / “#input”",
+        logo:"yaggababble",
+        colour:"#000"
+    }
 ]

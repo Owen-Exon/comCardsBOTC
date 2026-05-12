@@ -124,3 +124,7 @@ h2 {
 .hidden {
     display: none !important;
 }
+
+.cardInput {
+    font-size: 4.5vw;
+}

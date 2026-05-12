@@ -30,18 +30,23 @@ for (let i = 0; i < cards.length; i++) {
     let cardText = card.text
 
     cardText = cardText.replace(
+        /\#input/g,
+        match => `<input class="cardInput" type="text" onkeydown="changeInputText(this)">`
+    )
+    
+    cardText = cardText.replace(
         /\//g,
-       " <br> "
+       "<br>"
     )
 
     cardText = cardText.replace(
         /\b[A-Z]{2,}\b[?]*/g,
-        match => `<span class="keyWord"> ${match} </span>`
+        match => `<span class="keyWord">${match}</span>`
     )
     
     cardText = cardText.replace(
-        /\([^)]*\)/g,
-        match => `<span class="mini"> ${match} </span>`
+        /\|[^\|]*\|/g,
+        match => `<span class="mini">${match.replace(/\|/g,"")}</span>`
     )
     
     cardTexts.push(cardText)
@@ -82,11 +87,11 @@ for (let i = 0; i < cards.length; i++) {
 
     buttonText = buttonText.replace(
         /\b[A-Z]{2,}\b[?]*/g,
-        match => `<span class="buttonKeyWord"> ${match} </span>`
+        match => `<span class="buttonKeyWord">${match}</span>`
     )
     
     buttonText = buttonText.replace(
-        /\([^)]*\)/g,
+        /\|/g,
         ""
     )
 
@@ -97,7 +102,7 @@ for (let i = 0; i < cards.length; i++) {
     selection.appendChild(selectButton)
 }
 
-cardContainer.onclick = () => {selection.classList.remove("hidden")}
+cardContainer.onclick = (e) => {if (e.target.nodeName != "INPUT") selection.classList.remove("hidden")}
 
 function loadCard(text,backgroundColor,src,rotation,scale) {
     message.innerHTML = text
@@ -119,4 +124,30 @@ function loadCardIndex(i) {
     )
 }
 
-loadCardIndex(0)
+function changeInputText(element) {
+    if (event.key == "Enter") {
+        let text = element.value
+
+        text = text.replace(
+            /\//g,
+        "<br>"
+        )
+
+        text = text.replace(
+            /\b[A-Z]{2,}\b[?]*/g,
+            match => `<span class="keyWord">${match}</span>`
+        )
+        
+        text = text.replace(
+            /\|[^\|]*\|/g,
+            match => `<span class="mini">${match.replace(/\|/g,"")}</span>`
+        )
+
+        const template = document.createElement("template");
+        template.innerHTML = text;
+
+        element.replaceWith(...template.content.childNodes);
+    }
+}
+
+loadCardIndex(17)
