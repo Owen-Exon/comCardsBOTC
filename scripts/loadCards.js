@@ -30,7 +30,7 @@ for (let i = 0; i < cards.length; i++) {
     let cardText = card.text
 
     cardText = cardText.replace(
-        /\#input/g,
+        /\[input\]/g,
         match => `<input class="cardInput" type="text" onkeydown="changeInputText(this)">`
     )
     
@@ -45,8 +45,8 @@ for (let i = 0; i < cards.length; i++) {
     )
     
     cardText = cardText.replace(
-        /\|[^\|]*\|/g,
-        match => `<span class="mini">${match.replace(/\|/g,"")}</span>`
+        /\_[^\_]*\_/g,
+        match => `<span class="mini">${match.replace(/\_/g,"")}</span>`
     )
     
     cardTexts.push(cardText)
@@ -91,7 +91,7 @@ for (let i = 0; i < cards.length; i++) {
     )
     
     buttonText = buttonText.replace(
-        /\|/g,
+        /\_/g,
         ""
     )
 
@@ -139,8 +139,8 @@ function changeInputText(element) {
         )
         
         text = text.replace(
-            /\|[^\|]*\|/g,
-            match => `<span class="mini">${match.replace(/\|/g,"")}</span>`
+            /\_[^\_]*\_/g,
+            match => `<span class="mini">${match.replace(/\_/g,"")}</span>`
         )
 
         const template = document.createElement("template");
