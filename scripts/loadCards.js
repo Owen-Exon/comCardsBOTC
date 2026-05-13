@@ -1,3 +1,5 @@
+//#region variables
+
 const presetColours = {
     "evil":"hsl(0, 35%, 18%)",
     "good":"hsl(198, 51%, 25%)",
@@ -16,39 +18,21 @@ const background = document.getElementById("background")
 
 const selection = document.getElementById("selection")
 
-selection.onclick = () => selection.classList.add("hidden")
-
 let cardTexts = []
 let backgroundColors = []
 let rotationStyles = []
 let scaleStyles = []
 let srcs = []
 
+//#endregion variables
+
+//#region setupCards
+
 for (let i = 0; i < cards.length; i++) {
     const card = cards[i]
 
-    let cardText = card.text
+    const cardText = processCardText(card.text)
 
-    cardText = cardText.replace(
-        /\[input\]/g,
-        match => `<input class="cardInput" type="text" onkeydown="changeInputText(this)">`
-    )
-    
-    cardText = cardText.replace(
-        /\//g,
-       "<br>"
-    )
-
-    cardText = cardText.replace(
-        /\b[A-Z]{2,}\b[?]*/g,
-        match => `<span class="keyWord">${match}</span>`
-    )
-    
-    cardText = cardText.replace(
-        /\_[^\_]*\_/g,
-        match => `<span class="mini">${match.replace(/\_/g,"")}</span>`
-    )
-    
     cardTexts.push(cardText)
 
     const cardColour = presetColours.hasOwnProperty(card.colour) ? presetColours[card.colour] : card.colour
@@ -102,7 +86,36 @@ for (let i = 0; i < cards.length; i++) {
     selection.appendChild(selectButton)
 }
 
-cardContainer.onclick = (e) => {if (e.target.nodeName != "INPUT") selection.classList.remove("hidden")}
+cardContainer.onclick = (e) => {if (["INPUT"].indexOf(e.target.nodeName) == -1) selection.classList.remove("hidden")}
+selection.onclick = () => selection.classList.add("hidden")
+
+//#endregion setupCards
+
+//#region functions
+
+function processCardText(text) {
+    text = text.replace(
+        /\[input\]/g,
+        match => `<input class="cardInput" type="text" onkeydown="changeInputText(this)">`
+    )
+    
+    text = text.replace(
+        /\//g,
+       "<br>"
+    )
+
+    text = text.replace(
+        /\b[A-Z]{2,}\b[?]*/g,
+        match => `<span class="keyWord">${match}</span>`
+    )
+    
+    text = text.replace(
+        /\_[^\_]*\_/g,
+        match => `<span class="mini">${match.replace(/\_/g,"")}</span>`
+    )
+
+    return text
+}
 
 function loadCard(text,backgroundColor,src,rotation,scale) {
     message.innerHTML = text
@@ -126,22 +139,7 @@ function loadCardIndex(i) {
 
 function changeInputText(element) {
     if (event.key == "Enter") {
-        let text = element.value
-
-        text = text.replace(
-            /\//g,
-        "<br>"
-        )
-
-        text = text.replace(
-            /\b[A-Z]{2,}\b[?]*/g,
-            match => `<span class="keyWord">${match}</span>`
-        )
-        
-        text = text.replace(
-            /\_[^\_]*\_/g,
-            match => `<span class="mini">${match.replace(/\_/g,"")}</span>`
-        )
+        const text = processCardText(element.value)
 
         const template = document.createElement("template");
         template.innerHTML = text;
@@ -149,5 +147,7 @@ function changeInputText(element) {
         element.replaceWith(...template.content.childNodes);
     }
 }
+
+//#endregion functions
 
 loadCardIndex(0)
