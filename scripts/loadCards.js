@@ -31,7 +31,7 @@ let srcs = []
 for (let i = 0; i < cards.length; i++) {
     const card = cards[i]
 
-    const cardText = processCardText(card.text)
+    const cardText = processCardText(card)
 
     cardTexts.push(cardText)
 
@@ -65,7 +65,7 @@ for (let i = 0; i < cards.length; i++) {
     let buttonText = card.text
 
     buttonText = buttonText.replace(
-        /\//g,
+        /\/\//g,
        ""
     )
 
@@ -86,24 +86,30 @@ for (let i = 0; i < cards.length; i++) {
     selection.appendChild(selectButton)
 }
 
-cardContainer.onclick = (e) => {if (["INPUT"].indexOf(e.target.nodeName) == -1) selection.classList.remove("hidden")}
+cardContainer.onclick = (e) => {if (["INPUT","SELECT"].indexOf(e.target.nodeName) == -1) selection.classList.remove("hidden")}
 selection.onclick = () => selection.classList.add("hidden")
 
 //#endregion setupCards
 
 //#region functions
 
-function processCardText(text) {
+function processCardText(input) {
+    console.log(typeof input)
+    let text = undefined
+    let card = undefined
+    if (typeof input == "string") {
+        text = input
+        card = undefined
+    } else {
+        card = input
+        text = card.text
+    }
+
     text = text.replace(
-        /\[input\]/g,
-        match => `<input class="cardInput" type="text" onkeydown="changeInputText(this)">`
-    )
-    
-    text = text.replace(
-        /\//g,
+        /\/\//g,
        "<br>"
     )
-
+    
     text = text.replace(
         /\b[A-Z]{2,}\b[?]*/g,
         match => `<span class="keyWord">${match}</span>`
@@ -113,6 +119,18 @@ function processCardText(text) {
         /\_[^\_]*\_/g,
         match => `<span class="mini">${match.replace(/\_/g,"")}</span>`
     )
+
+    text = text.replace(
+        /\[input\]/g,
+        `<input class="cardInput" type="text" onkeydown="changeInputText(this)">`
+    )
+
+    if (card && card.hasOwnProperty("options")) {
+        text = text.replace(
+            /\[option\]/g,
+            `<select class="cardInput" onchange="changeInputText(this)"><option value='Please Select'>Please Select</option>${card.options.map(option => `<option value="${option}">${option.replace(/\/\//g,"").replace(/\_/g,"")}</option>`).join('')}</select>`
+        )
+    }
 
     return text
 }
@@ -138,7 +156,8 @@ function loadCardIndex(i) {
 }
 
 function changeInputText(element) {
-    if (event.key == "Enter") {
+    console.log(element.value)
+    if ((element.nodeName == "INPUT" && event.key == "Enter") || element.nodeName == "SELECT") {
         const text = processCardText(element.value)
 
         const template = document.createElement("template");

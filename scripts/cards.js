@@ -10,7 +10,7 @@ const cards = [
         colour:"evil"
     },
     {
-        text:"meet your fellow MINIONS / _(keep your eyes open)_",
+        text:"meet your fellow MINIONS // _(keep your eyes open)_",
         logo:"legion",
         rotation:-0.08,
         colour:"evil"
@@ -32,18 +32,18 @@ const cards = [
         colour:"meta"
     },
     {
-        text:"did you VOTE / today",
+        text:"did you VOTE // today",
         logo:"flowergirl",
         colour:"tellme"
     },
     {
-        text:"did you NOMINATE / today",
+        text:"did you NOMINATE // today",
         logo:"towncrier",
         rotation:0.5,
         colour:"tellme"
     },
     {
-        text:"YOU / are",
+        text:"YOU // are",
         logo:"townsfolk",
         colour:"tellyou"
     },
@@ -53,12 +53,12 @@ const cards = [
         colour:"tellyou"
     },
     {
-        text:"CHOOSE / for your ability",
+        text:"CHOOSE // for your ability",
         logo:"devilsadvocate",
         colour:"ability"
     },
     {
-        text:"do you / use your ABILITY?",
+        text:"do you // use your ABILITY?",
         logo:"amnesiac",
         colour:"ability"
     },
@@ -68,17 +68,17 @@ const cards = [
         colour:"good"
     },
     {
-        text:"you are / EVIL",
+        text:"you are // EVIL",
         logo:"wraith",
         colour:"evil"
     },
     {
-        text:"these characters are NOT / IN PLAY",
+        text:"these characters are NOT // IN PLAY",
         logo:"outsider",
         colour:"neutral"
     },
     {
-        text:"this character IS / IN PLAY",
+        text:"this character IS // IN PLAY",
         logo:"toymaker",
         colour:"neutral"
     },
@@ -88,8 +88,14 @@ const cards = [
         colour:"neutral"
     },
     {
-        text:"_your phrase is:_ / “[input]”",
+        text:"_your phrase is:_ // “[option]”",
+        options:["[input]","i think that's a lie","my info might be wrong","i don't // want to nominate"],
         logo:"yaggababble",
+        colour:"#000"
+    },
+    {
+        text:"[input]",
+        logo:"amnesiac",
         colour:"#000"
     }
 ]
