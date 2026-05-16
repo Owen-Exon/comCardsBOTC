@@ -18,11 +18,16 @@ const background = document.getElementById("background")
 
 const selection = document.getElementById("selection")
 
+const scriptSelect = document.getElementById("scriptSelect")
+
 let cardTexts = []
 let backgroundColors = []
 let rotationStyles = []
 let scaleStyles = []
 let srcs = []
+
+let scriptCards = []
+let buttons = []
 
 //#endregion variables
 
@@ -84,17 +89,32 @@ for (let i = 0; i < cards.length; i++) {
 
     selectButton.onclick = () => {loadCardIndex(i); selection.classList.add("hidden")}
     selection.appendChild(selectButton)
+    buttons.push(selectButton)
 }
 
 cardContainer.onclick = (e) => {if (["INPUT","SELECT"].indexOf(e.target.nodeName) == -1) selection.classList.remove("hidden")}
-selection.onclick = () => selection.classList.add("hidden")
+selection.onclick = (e) => {if (["SELECT"].indexOf(e.target.nodeName) == -1)selection.classList.add("hidden")}
+
+scripts.forEach((script,indexScript) => {
+    const cardIndexes = []
+    cards.forEach((card,indexCard) => {
+        if (card.scriptsWith === "any" || card.scriptsWith.some(character => script.includes(character))) {
+            cardIndexes.push(indexCard)
+        }
+    })
+    scriptCards.push(cardIndexes)
+
+    const temp = document.createElement("option")
+    temp.value = indexScript
+    temp.innerHTML = script[0].name
+    scriptSelect.appendChild(temp)
+});
 
 //#endregion setupCards
 
 //#region functions
 
 function processCardText(input) {
-    console.log(typeof input)
     let text = undefined
     let card = undefined
     if (typeof input == "string") {
@@ -164,6 +184,21 @@ function changeInputText(element) {
         template.innerHTML = text;
 
         element.replaceWith(...template.content.childNodes);
+    }
+}
+
+function changeScript(element) {
+    if (element.value === "all") {
+        buttons.forEach((button) => {
+            button.classList.remove("hidden")
+        })
+    } else {
+        buttons.forEach((button) => {
+            button.classList.add("hidden")
+        })
+        scriptCards[parseInt(element.value)].forEach((index) => {
+            buttons[index].classList.remove("hidden")
+        })
     }
 }
 
