@@ -1,5 +1,7 @@
 //#region variables
 
+const cards = cardsData.filter((value) => value != "break")
+
 const presetColours = {
     "evil":"hsl(0, 35%, 18%)",
     "good":"hsl(198, 51%, 25%)",
@@ -20,12 +22,6 @@ const selection = document.getElementById("selection")
 
 const scriptSelect = document.getElementById("scriptSelect")
 
-let cardTexts = []
-let backgroundColors = []
-let rotationStyles = []
-let scaleStyles = []
-let srcs = []
-
 let scriptCards = []
 let buttons = []
 
@@ -33,39 +29,36 @@ let buttons = []
 
 //#region setupCards
 
-for (let i = 0; i < cards.length; i++) {
-    const card = cards[i]
+for (let i = 0; i < cardsData.length; i++) {
+    const card = cardsData[i]
+
+    if (card == "break") {
+        const div = document.createElement("div")
+        div.classList.add("break")
+        selection.appendChild(div)
+        continue
+    }
 
     const cardText = processCardText(card)
 
-    cardTexts.push(cardText)
-
     const cardColour = presetColours.hasOwnProperty(card.colour) ? presetColours[card.colour] : card.colour
-    backgroundColors.push(cardColour)
 
-    src = `./icons/${card.logo}.png`
+    const src = `./icons/${card.logo}.png`
 
     const link = document.createElement('link');
     link.rel = 'preload';
     link.as = 'image';
     link.href = src;
     link.fetchPriority = 'high';
-    
-    srcs.push(src)
 
     document.head.append(link);
 
-    rotationStyles.push(
-        card.hasOwnProperty("rotation")
-            ? `${card.rotation}turn`
-            : ""
-    )
+    const rotationStyle = card.hasOwnProperty("rotation") ? `${card.rotation}turn` : ""
+        
 
-    scaleStyles.push(
-        card.hasOwnProperty("mirror")
-            ? `${card.mirror.includes("x") ? "-1" : "1"} ${card.mirror.includes("y") ? "-1" : "1"}`
-            : ""
-    )
+
+    const scaleStyle =
+        card.hasOwnProperty("mirror") ? `${card.mirror.includes("x") ? "-1" : "1"} ${card.mirror.includes("y") ? "-1" : "1"}` : ""
 
     let buttonText = card.text
 
@@ -87,7 +80,7 @@ for (let i = 0; i < cards.length; i++) {
     const selectButton = document.createElement("button")
     selectButton.innerHTML = `<span style="color:${cardColour};">█</span> ${buttonText}`
 
-    selectButton.onclick = () => {loadCardIndex(i); selection.classList.add("hidden")}
+    selectButton.onclick = () => {loadCard(cardText,cardColour,src,rotationStyle,scaleStyle); selection.classList.add("hidden")}
     selection.appendChild(selectButton)
     buttons.push(selectButton)
 }
@@ -165,16 +158,6 @@ function loadCard(text,backgroundColor,src,rotation,scale) {
     logo.style.scale = scale
 }
 
-function loadCardIndex(i) {
-    loadCard(
-        cardTexts[i],
-        backgroundColors[i],
-        srcs[i],
-        rotationStyles[i],
-        scaleStyles[i]
-    )
-}
-
 function changeInputText(element) {
     console.log(element.value)
     if ((element.nodeName == "INPUT" && event.key == "Enter") || element.nodeName == "SELECT") {
@@ -182,7 +165,6 @@ function changeInputText(element) {
 
         const template = document.createElement("template");
         template.innerHTML = text;
-
         element.replaceWith(...template.content.childNodes);
     }
 }
@@ -200,8 +182,27 @@ function changeScript(element) {
             buttons[index].classList.remove("hidden")
         })
     }
+    hideUneededBreaks()
+}
+
+function hideUneededBreaks() {
+    Array.from(selection.getElementsByClassName("break")).slice(1).forEach((breakPoint) => {
+        let done = false
+        let currentCompare = breakPoint.previousSibling
+        while (!done) {
+            if (currentCompare.classList.contains("break")) {
+                breakPoint.classList.add("hidden")
+                done = true
+            } else if (!currentCompare.classList.contains("hidden")) {
+                breakPoint.classList.remove("hidden")
+                done = true
+            }
+            currentCompare = currentCompare.previousSibling
+        }
+    })
 }
 
 //#endregion functions
 
-loadCardIndex(0)
+buttons.at(-1).onclick()
+selection.classList.remove("hidden")
