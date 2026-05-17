@@ -44,6 +44,26 @@ const cardsData = [
         scriptsWith:["lilmonsta"]
     },
     "break",
+    // Info
+    {
+        text:"these characters are NOT // IN PLAY",
+        logo:"outsider",
+        colour:"neutral",
+        scriptsWith:"any"
+    },
+    {
+        text:"this character IS // IN PLAY",
+        logo:"toymaker",
+        colour:"neutral",
+        scriptsWith:["widow","damsel"]
+    },
+    {
+        text:"this character SELECTED you",
+        logo:"revolutionary",
+        colour:"neutral",
+        scriptsWith:["harpy","cerenovus","barber","hatter","preacher","exorcist","barista","horlot"]
+    },
+    "break",
     // Alignment And Identity
     {
         text:"YOU // are",
@@ -102,8 +122,7 @@ const cardsData = [
         scriptsWith:["deviant"]
     },
     "break",
-
-    
+    // Tell me
     {
         text:"did you VOTE // today",
         logo:"flowergirl",
@@ -116,25 +135,6 @@ const cardsData = [
         rotation:0.5,
         colour:"tellme",
         scriptsWith:["towncrier"]
-    },
-    "break",
-    {
-        text:"these characters are NOT // IN PLAY",
-        logo:"outsider",
-        colour:"neutral",
-        scriptsWith:"any"
-    },
-    {
-        text:"this character IS // IN PLAY",
-        logo:"toymaker",
-        colour:"neutral",
-        scriptsWith:["widow","damsel"]
-    },
-    {
-        text:"this character SELECTED you",
-        logo:"revolutionary",
-        colour:"neutral",
-        scriptsWith:["harpy","cerenovus","barber","hatter","preacher","exorcist","barista","horlot"]
     },
     "break",
     // Meta
@@ -158,6 +158,7 @@ const cardsData = [
         scriptsWith:"any"
     },
     "break",
+    // Custom
     {
         text:"[input]",
         logo:"amnesiac",
