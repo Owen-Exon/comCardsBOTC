@@ -1,4 +1,4 @@
-const cardsData = [
+export const cardsData = [
     // Evil Setup
     {
         text:"meet your fellow MINIONS // _(keep your eyes open)_",

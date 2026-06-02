@@ -1,3 +1,5 @@
+import {cardsData} from "./cards.js"
+import {scripts} from "./loadScripts.js"
 //#region variables
 
 const cards = cardsData.filter((value) => value != "break")
@@ -28,6 +30,10 @@ let buttons = []
 //#endregion variables
 
 //#region setupCards
+
+scriptSelect.addEventListener("change", (e) => {
+    changeScript(e.target);
+});
 
 for (let i = 0; i < cardsData.length; i++) {
     const card = cardsData[i]
