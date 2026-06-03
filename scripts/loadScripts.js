@@ -1,27 +1,33 @@
 async function loadAllGameScripts() {
-    const res = await fetch("scripts/gameScripts/");
-    const html = await res.text();
+    const res = await fetch(
+    "/api/file/list?path=scripts/gameScripts/",
+        {
+            method: "GET"
+        }
+    );
 
-    const doc = new DOMParser().parseFromString(html, "text/html");
+    let scriptNames
+    if (res.status == 404) {
+        scriptNames = ["Bad Moon Rising.json","Sects and Violets.json","Trouble Brewing.json"]
+    } else {
+        const data = await res.json();
+        console.log(data);
+        
+        scriptNames = data.map(file => {
+            if (file.length != 0) {
+                return file.name
+            }
+        })
+    }
 
-    const files = [...doc.querySelectorAll("a")]
-        .map(a => a.getAttribute("href"))
-        .filter(href =>
-            href &&
-            href.endsWith(".json")
-        )
-        .map(href =>
-            decodeURIComponent(href).replace(/\\\\/g, "/")
-        )
-        .map(path => path.split("\\").pop()); // keep only filename
-    
-    const data = await Promise.all(
-        files.map(file =>
+    const scriptData = await Promise.all(
+        scriptNames.map(file =>
             fetch(`scripts/gameScripts/${file}`)
                 .then(r => r.json())
         )
     );
-    return data
+
+    return scriptData
 }
 
 export const scripts = await loadAllGameScripts();
