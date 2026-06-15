@@ -175,6 +175,8 @@ function changeInputText(element) {
     }
 }
 
+window.changeInputText = changeInputText
+
 function changeScript(element) {
     if (element.value === "all") {
         buttons.forEach((button) => {
