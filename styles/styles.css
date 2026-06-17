@@ -142,4 +142,28 @@ select, input {
     width: 100%;
     min-height: 2vw;
     max-width: 2vw;
+    
+}
+
+#invalid {
+    text-align: center;
+    display: none;
+    align-content: center;
+    color: #fff;
+    padding: 20px;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    background-color: #353544;
+    font-size: large;
+}
+
+@media (min-aspect-ratio: 1/1.7) {
+    #invalid {
+        display:unset;
+    }
+    body {
+        overflow: hidden;
+    }
 }
