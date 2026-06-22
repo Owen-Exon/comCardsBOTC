@@ -68,6 +68,8 @@ h2 {
     background-image: url("./background.png");
     background-size: cover;
     background-position: center;
+    max-height: 100%;
+    margin: auto;
 }
 
 #card > * {
@@ -145,25 +147,37 @@ select, input {
     
 }
 
-#invalid {
-    text-align: center;
-    display: none;
-    align-content: center;
-    color: #fff;
-    padding: 20px;
-    height: 100%;
-    width: 100%;
-    position: absolute;
-    top: 0;
-    background-color: #353544;
-    font-size: large;
-}
-
 @media (min-aspect-ratio: 1/1.7) {
-    #invalid {
-        display:unset;
+    #frame {
+        border-image-width: calc(30vh / 1.7);
     }
-    body {
-        overflow: hidden;
+    .mini {
+        font-size: calc(6vh / 1.7);
+    }
+    .keyWord {
+        font-size: calc(15vh / 1.7);
+    }
+    #message {
+        font-size: calc(11vh / 1.7);
+    }
+    #selection {
+        gap: calc(0.5vh / 1.7);
+    }
+    #selection button {
+        font-size: calc(4.3vh / 1.7);
+        padding: calc(1vh / 1.7);
+    }
+    h2 {
+        font-size: calc(8vh / 1.7);
+        margin: calc(3vh / 1.7);
+    }
+    select, input {
+        margin: calc(2vh / 1.7);
+        font-size: calc(4.3vh / 1.7);
+        padding: calc(1vh / 1.7);
+    }
+    .break {
+        min-height: calc(2vh / 1.7);
+        max-width: calc(2vh / 1.7);
     }
 }
