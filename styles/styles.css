@@ -22,10 +22,11 @@ html,body {
 body {
     align-content: center;
     background-color: #000;
-    overflow-x: hidden;
+    overflow: hidden;
 }
 
 #selection {
+    overflow-y: scroll;
     backdrop-filter: blur(10px);
     height: 100%;
     gap: 0.5vw;
