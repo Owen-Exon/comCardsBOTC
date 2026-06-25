@@ -5,13 +5,13 @@ import {scripts} from "./loadScripts.js"
 const cards = cardsData.filter((value) => value != "break")
 
 const presetColours = {
-    "evil":"hsl(0, 35%, 18%)",
-    "good":"hsl(198, 51%, 25%)",
-    "meta":"hsl(320, 51%, 25%)",
-    "tellme":"hsl(51, 50%, 25%)",
-    "tellyou":"hsl(272, 39%, 26%)",
-    "ability":"hsl(39, 41%, 21%)",
-    "neutral":"hsl(108, 39%, 26%)",
+  "evil":"hsl(0, 35%, 18%)",
+  "good":"hsl(198, 51%, 25%)",
+  "meta":"hsl(320, 51%, 25%)",
+  "tellme":"hsl(51, 50%, 25%)",
+  "tellyou":"hsl(272, 39%, 26%)",
+  "ability":"hsl(39, 41%, 21%)",
+  "neutral":"hsl(108, 39%, 26%)",
 }
 
 const cardContainer = document.getElementById("card")
@@ -24,6 +24,8 @@ const selection = document.getElementById("selection")
 
 const scriptSelect = document.getElementById("scriptSelect")
 
+const customScript = document.getElementById("customScript")
+
 let scriptCards = []
 let buttons = []
 
@@ -32,81 +34,86 @@ let buttons = []
 //#region setupCards
 
 scriptSelect.addEventListener("change", (e) => {
-    changeScript(e.target);
+  changeScript(e.target);
+});
+
+customScript.addEventListener("change", () => {
+  updateCustomScript()
 });
 
 for (let i = 0; i < cardsData.length; i++) {
-    const card = cardsData[i]
+  const card = cardsData[i]
 
-    if (card == "break") {
-        const div = document.createElement("div")
-        div.classList.add("break")
-        selection.appendChild(div)
-        continue
-    }
+  if (card == "break") {
+    const div = document.createElement("div")
+    div.classList.add("break")
+    selection.appendChild(div)
+    continue
+  }
 
-    const cardText = processCardText(card)
+  const cardText = processCardText(card)
 
-    const cardColour = presetColours.hasOwnProperty(card.colour) ? presetColours[card.colour] : card.colour
+  const cardColour = presetColours.hasOwnProperty(card.colour) ? presetColours[card.colour] : card.colour
 
-    const src = `./icons/${card.logo}.png`
+  const src = `./icons/${card.logo}.png`
 
-    const link = document.createElement('link');
-    link.rel = 'preload';
-    link.as = 'image';
-    link.href = src;
-    link.fetchPriority = 'high';
+  const link = document.createElement('link');
+  link.rel = 'preload';
+  link.as = 'image';
+  link.href = src;
+  link.fetchPriority = 'high';
 
-    document.head.append(link);
+  document.head.append(link);
 
-    const rotationStyle = card.hasOwnProperty("rotation") ? `${card.rotation}turn` : ""
-        
-
-
-    const scaleStyle =
-        card.hasOwnProperty("mirror") ? `${card.mirror.includes("x") ? "-1" : "1"} ${card.mirror.includes("y") ? "-1" : "1"}` : ""
-
-    let buttonText = card.text
-
-    buttonText = buttonText.replace(
-        /\/\//g,
-       ""
-    )
-
-    buttonText = buttonText.replace(
-        /\b[A-Z]{2,}\b[?]*/g,
-        match => `<span class="buttonKeyWord">${match}</span>`
-    )
+  const rotationStyle = card.hasOwnProperty("rotation") ? `${card.rotation}turn` : ""
     
-    buttonText = buttonText.replace(
-        /\_/g,
-        ""
-    )
 
-    const selectButton = document.createElement("button")
-    selectButton.innerHTML = `<span style="color:${cardColour};">█</span> ${buttonText}`
 
-    selectButton.onclick = () => {loadCard(cardText,cardColour,src,rotationStyle,scaleStyle); selection.classList.add("hidden")}
-    selection.appendChild(selectButton)
-    buttons.push(selectButton)
+  const scaleStyle =
+    card.hasOwnProperty("mirror") ? `${card.mirror.includes("x") ? "-1" : "1"} ${card.mirror.includes("y") ? "-1" : "1"}` : ""
+
+  let buttonText = card.text
+
+  buttonText = buttonText.replace(
+    /\/\//g,
+     ""
+  )
+
+  buttonText = buttonText.replace(
+    /\b[A-Z]{2,}\b[?]*/g,
+    match => `<span class="buttonKeyWord">${match}</span>`
+  )
+  
+  buttonText = buttonText.replace(
+    /\_/g,
+    ""
+  )
+
+  const selectButton = document.createElement("button")
+  selectButton.innerHTML = `<span style="color:${cardColour};">█</span> ${buttonText}`
+
+  selectButton.onclick = () => {loadCard(cardText,cardColour,src,rotationStyle,scaleStyle); selection.classList.add("hidden")}
+  selection.appendChild(selectButton)
+  buttons.push(selectButton)
 }
 
 cardContainer.onclick = (e) => {if (["INPUT","SELECT"].indexOf(e.target.nodeName) == -1) selection.classList.remove("hidden")}
-selection.onclick = (e) => {if (["SELECT"].indexOf(e.target.nodeName) == -1)selection.classList.add("hidden")}
+selection.onclick = (e) => {if (["INPUT","SELECT"].indexOf(e.target.nodeName) == -1)selection.classList.add("hidden")}
+
 
 scripts.forEach((script,indexScript) => {
-    const cardIndexes = []
-    cards.forEach((card,indexCard) => {
-        if (card.scriptsWith === "any" || card.scriptsWith.some(character => script.includes(character))) {
-            cardIndexes.push(indexCard)
-        }
-    })
-    scriptCards.push(cardIndexes)
+  const cardIndexes = []
+  cards.forEach((card,indexCard) => {
+    if (card.scriptsWith === "any" || card.scriptsWith.some(character => script.includes(character))) {
+      cardIndexes.push(indexCard)
+    }
+  })
+  scriptCards.push(cardIndexes)
 
-    const temp = document.createElement("option")
-    temp.value = indexScript
-    temp.innerHTML = script[0].name
-    scriptSelect.appendChild(temp)
+  const temp = document.createElement("option")
+  temp.value = indexScript
+  temp.innerHTML = script[0].name
+  scriptSelect.appendChild(temp)
 });
 
 //#endregion setupCards
@@ -114,100 +121,139 @@ scripts.forEach((script,indexScript) => {
 //#region functions
 
 function processCardText(input) {
-    let text = undefined
-    let card = undefined
-    if (typeof input == "string") {
-        text = input
-        card = undefined
-    } else {
-        card = input
-        text = card.text
-    }
+  let text = undefined
+  let card = undefined
+  if (typeof input == "string") {
+    text = input
+    card = undefined
+  } else {
+    card = input
+    text = card.text
+  }
 
-    text = text.replace(
-        /\/\//g,
-       "<br>"
-    )
-    
-    text = text.replace(
-        /\b[A-Z]{2,}\b[?]*/g,
-        match => `<span class="keyWord">${match}</span>`
-    )
-    
-    text = text.replace(
-        /\_[^\_]*\_/g,
-        match => `<span class="mini">${match.replace(/\_/g,"")}</span>`
-    )
+  text = text.replace(
+    /\/\//g,
+     "<br>"
+  )
+  
+  text = text.replace(
+    /\b[A-Z]{2,}\b[?]*/g,
+    match => `<span class="keyWord">${match}</span>`
+  )
+  
+  text = text.replace(
+    /\_[^\_]*\_/g,
+    match => `<span class="mini">${match.replace(/\_/g,"")}</span>`
+  )
 
+  text = text.replace(
+    /\[input\]/g,
+    `<input class="cardInput" type="text" onkeydown="changeInputText(this)">`
+  )
+
+  if (card && card.hasOwnProperty("options")) {
     text = text.replace(
-        /\[input\]/g,
-        `<input class="cardInput" type="text" onkeydown="changeInputText(this)">`
+      /\[option\]/g,
+      `<select class="cardInput" onchange="changeInputText(this)"><option value='Please Select'>Please Select</option>${card.options.map(option => `<option value="${option}">${option.replace(/\/\//g,"").replace(/\_/g,"")}</option>`).join('')}</select>`
     )
+  }
 
-    if (card && card.hasOwnProperty("options")) {
-        text = text.replace(
-            /\[option\]/g,
-            `<select class="cardInput" onchange="changeInputText(this)"><option value='Please Select'>Please Select</option>${card.options.map(option => `<option value="${option}">${option.replace(/\/\//g,"").replace(/\_/g,"")}</option>`).join('')}</select>`
-        )
-    }
-
-    return text
+  return text
 }
 
 function loadCard(text,backgroundColor,src,rotation,scale) {
-    message.innerHTML = text
+  message.innerHTML = text
 
-    background.style.backgroundColor = backgroundColor
+  background.style.backgroundColor = backgroundColor
 
-    logo.src = src
-    logo.style.rotate = rotation
-    logo.style.scale = scale
+  logo.src = src
+  logo.style.rotate = rotation
+  logo.style.scale = scale
 }
 
 function changeInputText(element) {
-    console.log(element.value)
-    if ((element.nodeName == "INPUT" && event.key == "Enter") || element.nodeName == "SELECT") {
-        const text = processCardText(element.value)
+  console.log(element.value)
+  if ((element.nodeName == "INPUT" && event.key == "Enter") || element.nodeName == "SELECT") {
+    const text = processCardText(element.value)
 
-        const template = document.createElement("template");
-        template.innerHTML = text;
-        element.replaceWith(...template.content.childNodes);
-    }
+    const template = document.createElement("template");
+    template.innerHTML = text;
+    element.replaceWith(...template.content.childNodes);
+  }
 }
 
 window.changeInputText = changeInputText
 
 function changeScript(element) {
-    if (element.value === "all") {
-        buttons.forEach((button) => {
-            button.classList.remove("hidden")
-        })
-    } else {
-        buttons.forEach((button) => {
-            button.classList.add("hidden")
-        })
-        scriptCards[parseInt(element.value)].forEach((index) => {
-            buttons[index].classList.remove("hidden")
-        })
-    }
-    hideUneededBreaks()
+  if (element.value === "all" || element.value === "custom") {
+    buttons.forEach((button) => {
+      button.classList.remove("hidden")
+    })
+  } else {
+    buttons.forEach((button) => {
+      button.classList.add("hidden")
+    })
+    scriptCards[parseInt(element.value)].forEach((index) => {
+      buttons[index].classList.remove("hidden")
+    })
+  }
+
+  if (element.value === "custom") {
+    customScript.classList.remove("hidden")
+    updateCustomScript()
+  } else {
+    customScript.classList.add("hidden")
+  }
+
+  hideUneededBreaks()
 }
 
+
 function hideUneededBreaks() {
-    Array.from(selection.getElementsByClassName("break")).slice(1).forEach((breakPoint) => {
-        let done = false
-        let currentCompare = breakPoint.previousSibling
-        while (!done) {
-            if (currentCompare.classList.contains("break")) {
-                breakPoint.classList.add("hidden")
-                done = true
-            } else if (!currentCompare.classList.contains("hidden")) {
-                breakPoint.classList.remove("hidden")
-                done = true
-            }
-            currentCompare = currentCompare.previousSibling
+  Array.from(selection.getElementsByClassName("break")).slice(1).forEach((breakPoint) => {
+    let done = false
+    let currentCompare = breakPoint.previousSibling
+    while (!done) {
+      if (currentCompare.classList.contains("break")) {
+        breakPoint.classList.add("hidden")
+        done = true
+      } else if (!currentCompare.classList.contains("hidden")) {
+        breakPoint.classList.remove("hidden")
+        done = true
+      }
+      currentCompare = currentCompare.previousSibling
+    }
+  })
+}
+
+function updateCustomScript() {
+  if (customScript.files.length === 1) {
+    let read = new FileReader();
+    read.readAsBinaryString(customScript.files[0]);
+    read.onload = () => {
+      const scriptData = JSON.parse(read.result)
+      
+      const cardIndexes = []
+      cards.forEach((card,indexCard) => {
+        if (
+          card.scriptsWith === "any" ||
+          card.scriptsWith.some(character => scriptData.includes(character))
+        ) {
+          cardIndexes.push(indexCard)
         }
-    })
+      })
+
+      buttons.forEach((button) => {
+        button.classList.add("hidden")
+      })
+      
+      cardIndexes.forEach((index) => {
+        buttons[index].classList.remove("hidden")
+      })
+
+      hideUneededBreaks()
+    }
+  }
 }
 
 //#endregion functions

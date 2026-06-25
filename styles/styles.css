@@ -37,6 +37,7 @@ body {
     display: flex;
     flex-direction: column;
     background-color: #35354481;
+    padding-bottom: 20px;
 }
 
 #selection button {

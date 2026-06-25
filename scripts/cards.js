@@ -26,7 +26,7 @@ export const cardsData = [
         scriptsWith:["mezepheles"]
     },
     {
-        text:"_your phrase is:_ // “[option]”",
+        text:"_your phrase is:_ // “[input]”",
         options:[
             "[input]",
             "i think that's a lie",

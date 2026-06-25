@@ -1,18 +1,9 @@
 async function loadAllGameScripts() {
-    const res = await fetch(
-    "/api/file/list?path=scripts/gameScripts/",
-        {
-            method: "GET"
-        }
-    );
-
-    let scriptNames
-    if (res.status == 404) {
-        scriptNames = ["Bad Moon Rising.json","Sects and Violets.json","Trouble Brewing.json"]
-    } else {
-        const data = await res.json();       
-        scriptNames = data.filter(file => file.length != 0).map(file => file.name)
-    }
+    const scriptNames = [
+        "Bad Moon Rising.json",
+        "Sects and Violets.json",
+        "Trouble Brewing.json"
+    ]
 
     const scriptData = await Promise.all(
         scriptNames.map(file =>
