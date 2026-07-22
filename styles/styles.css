@@ -178,6 +178,7 @@ select, input {
     h2 {
         font-size: calc(8vh / 1.7);
         margin: calc(3vh / 1.7);
+        margin-bottom: 0;
     }
     select, input {
         margin: calc(2vh / 1.7);
