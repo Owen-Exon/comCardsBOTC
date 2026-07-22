@@ -149,6 +149,12 @@ select, input {
     
 }
 
+.ccc-icon {
+    margin: 2vw;
+    order: 999;
+    width: 35vw;
+}
+
 @media (min-aspect-ratio: 1/1.7) {
     #frame {
         border-image-width: calc(30vh / 1.7);
@@ -182,4 +188,9 @@ select, input {
         min-height: calc(2vh / 1.7);
         max-width: calc(2vh / 1.7);
     }
+    .ccc-icon {
+        margin: calc(2vh / 1.7);
+        width: calc(35vh / 1.7);
+    }
 }
+
