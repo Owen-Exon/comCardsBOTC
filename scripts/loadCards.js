@@ -74,7 +74,7 @@ for (let i = 0; i < cardsData.length; i++) {
     )
 
     buttonText = buttonText.replace(
-        /\b[A-Z]{2,}\b[?]*/g,
+        /\b[A-Z']{2,}\b[?]*/g,
         match => `<span class="buttonKeyWord">${match}</span>`
     )
     
@@ -130,7 +130,7 @@ function processCardText(input) {
     )
     
     text = text.replace(
-        /\b[A-Z]{2,}\b[?]*/g,
+        /\b[A-Z']{2,}\b[?]*/g,
         match => `<span class="keyWord">${match}</span>`
     )
     

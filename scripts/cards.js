@@ -26,13 +26,7 @@ export const cardsData = [
         scriptsWith:["mezepheles"]
     },
     {
-        text:"_your phrase is:_ // “[option]”",
-        options:[
-            "[input]",
-            "i think that's a lie",
-            "my info might be wrong",
-            "i don't // want to nominate"
-        ],
+        text:"_your phrase is:_ // “[input]”",
         logo:"yaggababble",
         colour:"evil",
         scriptsWith:["yaggababble"]
@@ -42,6 +36,12 @@ export const cardsData = [
         logo:"lilmonsta",
         colour:"evil",
         scriptsWith:["lilmonsta"]
+    },
+    {
+        text:"you // CAN'T OPEN // YOUR EYES tonight",
+        logo:"wraith",
+        colour:"evil",
+        scriptsWith:["wraith"]
     },
     "break",
     // Info
@@ -61,7 +61,7 @@ export const cardsData = [
         text:"this character SELECTED you",
         logo:"revolutionary",
         colour:"neutral",
-        scriptsWith:["harpy","cerenovus","barber","hatter","preacher","exorcist","barista","horlot"]
+        scriptsWith:["harpy","cerenovus","barber","boffin","hatter","preacher","exorcist","barista","harlot"]
     },
     "break",
     // Alignment And Identity
@@ -101,25 +101,35 @@ export const cardsData = [
         text:"do you // use your ABILITY?",
         logo:"amnesiac",
         colour:"ability",
-        scriptsWith:["assassin","wizard","engineer","nightwatchman","courtier","seamstress","philosopher","huntsman","professor"]
-    },
-    {
-        text:"the boffin gives you this ABILITY",
-        logo:"boffin",
-        colour:"ability",
-        scriptsWith:["boffin"]
+        scriptsWith:["assassin","wizard","engineer","nightwatchman","courtier","seamstress","philosopher","huntsman","professor","bonecollector"]
     },
     {
         text:"your ABILITY is",
         logo:"alchemist",
         colour:"ability",
-        scriptsWith:["alchemist","apprentice"]
+        scriptsWith:["alchemist","apprentice","boffin"]
     },
     {
-        text:"_instead of being funny:_ [input]",
-        logo:"deviant",
+        text:"choose [option] [option] [option]",
+        logo:"amnesiac",
+        options:[
+            "a",
+            "one",
+            "two",
+            "three",
+            "living",
+            "dead",
+            "PLAYER",
+            "PLAYERS",
+            "CHARACTER",
+            "CHARACTERS",
+            "NUMBER",
+            "NUMBERS",
+            ""
+        ],
         colour:"ability",
-        scriptsWith:["deviant"]
+        scriptsWith:"any"
+
     },
     "break",
     // Tell me
@@ -152,7 +162,7 @@ export const cardsData = [
         scriptsWith:"any"
     },
     {
-        text:"invalid selection CHOOSE AGAIN",
+        text:"that's not allowed CHOOSE AGAIN",
         logo:"gossip",
         colour:"meta",
         scriptsWith:"any"
