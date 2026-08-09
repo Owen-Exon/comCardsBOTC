@@ -30,7 +30,7 @@ body {
     overflow-x: hidden;
     backdrop-filter: blur(10px);
     height: 100%;
-    gap: 0.5vw;
+    gap: min(0.5vw,calc(0.5vh/1.7));
     width: 100%;
     position: absolute;
     top: 0;
@@ -40,8 +40,8 @@ body {
 }
 
 #selection button {
-    font-size: 4.3vw;
-    padding: 1vw;
+    font-size: min(4.3vw,calc(4.3vh/1.7));
+    padding: min(1vw,calc(1vh/1.7));
     text-align: left;
     background-color: #000000;
     color: #fff;
@@ -56,10 +56,10 @@ body {
 h2 {
     font-family: Dumbledor;
     font-weight: 400;
-    font-size: 8vw;
+    font-size: min(8vw,calc(8vh/1.7));
     color: #fff;
     text-align: left;
-    margin: 3vw;
+    margin: min(3vw,calc(3vh/1.7));
     margin-bottom: 0;
 }
 
@@ -86,7 +86,7 @@ h2 {
 
 #frame {
     border-image:url("./Outline.svg");
-    border-image-width: 30vw;
+    border-image-width: min(30vw,calc(30vh/1.7));
     border-image-slice: 47%;
     border-image-repeat: stretch;
     mix-blend-mode:lighten;
@@ -101,7 +101,7 @@ h2 {
 
 #message {
     top: 50%;
-    font-size: 11vw;
+    font-size: min(11vw,calc(11vh/1.7));
     width: 100%;
     height: auto;
     box-sizing: border-box;
@@ -119,11 +119,11 @@ h2 {
     color: bisque;
     font-family: Dumbledor;
     font-weight: 400;
-    font-size: 15vw;
+    font-size: min(15vw,calc(15vh/1.7));
 }
 
 .mini {
-    font-size: 6vw;
+    font-size: min(6vw,calc(6vh/1.7));
 }
 
 .hidden {
@@ -131,10 +131,10 @@ h2 {
 }
 
 select, input {
-    margin: 2vw;
+    margin: min(2vw,calc(2vh/1.7));
     width: min-content;
-    font-size: 4.3vw;
-    padding: 1vw;
+    font-size: min(4.3vw,calc(4.3vh/1.7));
+    padding: min(1vw,calc(1vh/1.7));
     text-align: left;
     background-color: #000000;
     color: #fff;
@@ -144,54 +144,13 @@ select, input {
 .break {
     content: "";
     width: 100%;
-    min-height: 2vw;
-    max-width: 2vw;
+    min-height: min(2vw,calc(2vh/1.7));
+    max-width: min(2vw,calc(2vh/1.7));
     
 }
 
 .ccc-icon {
-    margin: 2vw;
+    margin: min(2vw,calc(2vh/1.7));
     order: 999;
-    width: 35vw;
+    width: min(35vw,calc(35vh/1.7));
 }
-
-@media (min-aspect-ratio: 1/1.7) {
-    #frame {
-        border-image-width: calc(30vh / 1.7);
-    }
-    .mini {
-        font-size: calc(6vh / 1.7);
-    }
-    .keyWord {
-        font-size: calc(15vh / 1.7);
-    }
-    #message {
-        font-size: calc(11vh / 1.7);
-    }
-    #selection {
-        gap: calc(0.5vh / 1.7);
-    }
-    #selection button {
-        font-size: calc(4.3vh / 1.7);
-        padding: calc(1vh / 1.7);
-    }
-    h2 {
-        font-size: calc(8vh / 1.7);
-        margin: calc(3vh / 1.7);
-        margin-bottom: 0;
-    }
-    select, input {
-        margin: calc(2vh / 1.7);
-        font-size: calc(4.3vh / 1.7);
-        padding: calc(1vh / 1.7);
-    }
-    .break {
-        min-height: calc(2vh / 1.7);
-        max-width: calc(2vh / 1.7);
-    }
-    .ccc-icon {
-        margin: calc(2vh / 1.7);
-        width: calc(35vh / 1.7);
-    }
-}
-
