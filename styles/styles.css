@@ -28,7 +28,7 @@ body {
 #selection {
     overflow-y: scroll;
     overflow-x: hidden;
-    backdrop-filter: blur(10px);
+    backdrop-filter: blur(min(2vw,calc(2vh/1.7)));
     height: 100%;
     gap: min(0.5vw,calc(0.5vh/1.7));
     width: 100%;
@@ -111,7 +111,7 @@ h2 {
     padding: 8%;
     padding-bottom: 12%;
     padding-top: 0;
-    text-shadow: 5px 5px 10px #000, 5px 5px 10px #000;
+    text-shadow: min(1vw,calc(1vh/1.7)) min(1vw,calc(1vh/1.7)) min(2vw,calc(2vh/1.7)) #000, min(1vw,calc(1vh/1.7)) min(1vw,calc(1vh/1.7)) min(2vw,calc(2vh/1.7)) #000;
     font-weight: 600;
 }
 
@@ -153,4 +153,25 @@ select, input {
     margin: min(2vw,calc(2vh/1.7));
     order: 999;
     width: min(35vw,calc(35vh/1.7));
+}
+
+.toInstructionsButton {
+    flex: 0 0 1;
+    outline: #424242  solid min(0.5vw,calc(0.5vh/1.7));
+    border-radius: min(2vw,calc(2vh/1.7));
+    margin: min(2vw,calc(2vh/1.7));
+    height: min(10vw,calc(10vh/1.7));
+    width: min(10vw,calc(10vh/1.7));
+    background: url("./material-symbols--book-2.svg") center / cover no-repeat;
+    transition: outline 0.2s;
+}
+.toInstructionsButton:hover {
+  outline-color: #ffffff;
+}
+
+
+.flexrow {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
 }
